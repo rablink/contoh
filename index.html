@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kyy Bisniss - Peluang Bisnis Online</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* --- GLOBAL STYLES & RESET --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: #f6f6f6;
+      color: #333;
+      line-height: 1.6;
+      background: linear-gradient(to bottom right, #eaf4ff, #ffffff);
+    }
+    header, section {
+      padding: 30px 20px;
+      text-align: center;
+      overflow: hidden; /* Penting untuk animasi */
+    }
+    header {
+      background-color: #4a90e2; /* Warna Biru Lebih Cerah */
+      color: white;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      position: relative;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      font-weight: 800;
+      animation: slideInTop 1s ease-out;
+    }
+    header img {
+      width: 140px;
+      height: auto;
+      margin-bottom: 15px;
+      transition: transform 0.3s ease;
+    }
+    header img:hover {
+      animation: shake 0.5s;
+      animation-iteration-count: infinite;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      margin: 30px 0 30px;
+      color: #1e3a8a; /* Warna Biru Tua */
+      font-weight: 700;
+    }
+
+    /* --- GRID & CARD STYLES --- */
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+    }
+    .card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      padding: 25px;
+      max-width: 90%;
+      width: 400px;
+      text-align: left;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 5px solid #4a90e2;
+    }
+    .card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+    .card h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .highlight {
+      color: #4a90e2;
+      font-weight: bold;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      background: #4a90e2;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    /* --- STEPS SECTION --- */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .step {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .step:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    .step img {
+      width: 50px;
+      height: 50px;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+    }
+
+    /* --- ANIMATIONS --- */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      10% { transform: translate(-1px, -2px) rotate(-1deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      30% { transform: translate(3px, 2px) rotate(0deg); }
+      40% { transform: translate(1px, -1px) rotate(1deg); }
+      50% { transform: translate(-1px, 2px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      70% { transform: translate(3px, 1px) rotate(-1deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      90% { transform: translate(1px, 2px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+    @keyframes slideInTop {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animated-section {
+      opacity: 0;
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    .animated-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .section-title.is-visible {
+      animation: slideInTop 0.8s ease-out;
+      opacity: 1;
+    }
+
+    /* --- WHATSAPP BUTTON --- */
+    .wa-button {
+      display: inline-block;
+      background-color: #25D366;
+      color: white;
+      padding: 15px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.3s;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+      animation: pulse 1.5s infinite;
+      font-size: 1.1rem;
+    }
+    .wa-button:hover {
+      background-color: #128C7E;
+      transform: scale(1.05);
+    }
+
+    /* --- TESTIMONIAL SLIDER --- */
+    .testimonial-slider {
+      width: 90%;
+      max-width: 400px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      position: relative;
+    }
+    .slides {
+      display: flex;
+      transition: transform 0.6s ease-in-out; /* Transisi Geser Lebih Halus */
+    }
+    .slides img {
+      min-width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* --- FAQ ACCORDION --- */
+    .faq {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .faq-item {
+      margin-bottom: 12px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .faq-question {
+      width: 100%;
+      padding: 18px 25px;
+      text-align: left;
+      background: #6aade4;
+      color: white;
+      border: none;
+      outline: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      position: relative;
+    }
+    .faq-question::after {
+      content: '+';
+      position: absolute;
+      right: 20px;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    .faq-item.active .faq-question::after {
+      content: '-';
+      transform: rotate(180deg);
+    }
+    .faq-question:hover {
+      background: #5599d4;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      background: #fff;
+      padding: 0 25px;
+      transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 1000px; /* Cukup untuk konten */
+      padding: 15px 25px;
+    }
+    .faq-answer p {
+      margin: 10px 0;
+    }
+
+    /* --- PROMO & COUNTDOWN --- */
+    .tebal-bara {
+      font-weight: 800;
+      font-size: 2.5rem;
+      color: #ff3b30; /* Merah Menyala */
+      padding: 5px 10px;
+      border-radius: 8px;
+      text-shadow: 0 0 10px rgba(255, 59, 48, 0.8);
+      animation: baraGlow 1s infinite alternate;
+    }
+    #countdown {
+      background: #fff;
+      padding: 15px 30px;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #ff3b30;
+      border: 3px solid #ff3b30;
+    }
+
+    /* --- FLOATING ELEMENTS & MISC --- */
+    .slot-terbatas {
+      position: absolute;
+      top: 10px;
+      left: -50px;
+      background: linear-gradient(45deg, #ff6b6b, #e74c3c);
+      color: white;
+      padding: 10px 40px;
+      font-weight: bold;
+      font-size: 16px;
+      transform: rotate(-45deg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      border: 2px solid white;
+      z-index: 9999;
+    }
+    .floating-chat {
+      position: fixed;
+      bottom: 80px;
+      left: 20px;
+      background-color: #fff;
+      color: #333;
+      padding: 12px 18px;
+      border-radius: 25px 25px 25px 5px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      font-size: 14px;
+      display: none;
+      z-index: 999;
+      max-width: 250px;
+      animation: fadeInOut 6s ease-in-out;
+      border-left: 5px solid #ffaa00;
+    }
+    @keyframes fadeInOut {
+      0% {opacity: 0; transform: translateX(-20px);}
+      10% {opacity: 1; transform: translateX(0);}
+    90% {opacity: 1;}
+    100% {opacity: 0; transform: translateX(-20px);}
+    }
+    .join-section {
+      background-color: #eaf4ff;
+      padding: 3rem 2rem;
+      border-radius: 15px;
+      margin-top: 2rem;
+      text-align: center;
+      border: 1px solid #4a90e2;
+    }
+    ul.checklist {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+      margin: 20px 0;
+    }
+    ul.checklist li {
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    ul.checklist li::before {
+      content: "🚀 "; /* Emoji yang lebih menarik */
+      margin-right: 8px;
+      color: #4a90e2;
+    }
+    .cta-button .btn {
+      background-color: #4a90e2;
+      color: white;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 50px;
+      display: inline-block;
+      margin-top: 1rem;
+      transition: background-color 0.3s, transform 0.3s;
+      box-shadow: 0 4px 10px rgba(74, 144, 226, 0.4);
+    }
+    .cta-button .btn:hover {
+      background-color: #3b7ad0;
+      transform: translateY(-3px);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <div id="chat1" class="floating-chat">💬 “Awalnya ragu, ternyata dibimbing dari nol sampai bisa! -Dinda”</div>
+  <div id="chat2" class="floating-chat">💬 “Dapet bahan promosi lengkap tinggal upload doang!” -Rani</div>
+  <div id="chat3" class="floating-chat">💬 “Cuma modal HP dan kuota udah bisa bisnis online!” -Adit</div>
+  <div id="chat4" class="floating-chat">💬 “Modal kecil, hasil gede. Seriusan ini peluang bagus banget!” -Intan</div>
+  <div id="chat5" class="floating-chat">💬 “Dikasih caption, gambar, video. Tinggal upload aja!” -Surya</div>
+
+    <header>
+    <div class="slot-terbatas">
+      *Slot Terbatas!
+    </div>
+    <img src="IMG-20251118-WA0011-removebg-preview.png" alt="Logo Kyy Bisniss">
+    <h1>WELCOME TO <br>**@kyy.bisniss**</h1>
+    <section style="text-align: center; margin: 40px 0; background: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 15px;">
+      <h2 style="font-size: 1.2rem; color: #fff; margin-bottom: 5px;">Total Member Aktif:</h2>
+      <div id="counter" style="font-size: 3rem; font-weight: bold; color: #ffeb3b; text-shadow: 0 0 10px rgba(0,0,0,0.5);">0</div>
+    </section>
+    <p style="font-size: 1rem; color: #f0f0f0; margin-top: 20px;">
+      Sebelum join, silakan cek juga story dan sorotan di akun 
+      <a href="https://www.instagram.com/kyy.bisniss" target="_blank"
+         style="display: inline-block; padding: 8px 16px; margin-left: 8px; background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af); color: #fff; font-weight: 600; border-radius: 10px; text-decoration: none; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+        kyy.bisniss 📸
+      </a>
+    </p>
+  </header>
+
+    <section class="animated-section">
+    <h2 class="section-title">❓ Apakah kamu termasuk orang-orang ini?</h2>
+    <div class="grid">
+      <div class="card">
+        <p><strong>1. PENGANGGURAN</strong> yang sudah lamar kerja sana sini tapi belum ada panggilan.</p>
+        <p><strong>2. PELAJAR/MAHASISWA</strong> yang pengen punya penghasilan sendiri, uang jajan tambahan, atau bayar UKT.</p>
+        <p><strong>3. IRT</strong> yang pengen punya penghasilan dari rumah tanpa ninggalin anak & suami.</p>
+        <p><strong>4. Butuh kerjaan</strong> yang bisa dikerjakan **dimana pun dan kapan pun**, bahkan sambil rebahan!</p>
+      </div>
+    </div>
+  </section>
+
+    <section class="animated-section">
+    <h2 class="section-title">🌟 Testimoni Sukses Member</h2>
+    <div class="testimonial-slider">
+      <div class="slides">
+        <img src="testimoni1.jpg" alt="Testimoni 1">
+        <img src="testimoni2.jpg" alt="Testimoni 2">
+        <img src="testimoni3.jpg" alt="Testimoni 3">
+        <img src="testimoni4.jpg" alt="Testimoni 4">
+        <img src="testimoni5.jpg" alt="Testimoni 5">
+        <img src="testimoni6.jpg" alt="Testimoni 6">
+        <img src="testimoni7.jpg" alt="Testimoni 7">
+        <img src="testimoni8.jpg" alt="Testimoni 8">
+        <img src="testimoni9.jpg" alt="Testimoni 9">
+        <img src="testimoni10.jpg" alt="Testimoni 10">
+      </div>
+    </div>
+    <p style="margin-top: 15px; font-style: italic;">Geser otomatis untuk melihat lebih banyak bukti!</p>
+  </section>
+
+    <section class="animated-section">
+    <h2 class="section-title">💡 Penjelasan Singkat Program</h2>
+    <img src="1.jpg" alt="Penjelasan Program 1" style="max-width: 90%; height: auto; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <img src="2.jpg" alt="Penjelasan Program 2" style="max-width: 90%; height: auto; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <img src="3.jpg" alt="Penjelasan Program 3" style="max-width: 90%; height: auto; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+  </section>
+
+    <section class="animated-section">
+    <h2 class="section-title">💼 2 Bisnis Sekaligus Setelah Join:</h2>
+    <p>(Silakan **klik** untuk melihat detail)</p>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-question">1. BISNIS DATABASE (Jual File Kontak Supplier)</button>
+        <div class="faq-answer">
+          <p>Database adalah menjual kembali **data file kontak supplier berkualitas** dari tangan pertama dengan harga yang terjangkau (atau lebih mudahnya, **invite member**).</p>
+          <h3>Potensi Keuntungan File Database:</h3>
+          <p>Misal kamu jual dengan harga **Rp50.000**. Jika kamu bisa jual ke 10 orang dalam 1 hari = **Rp500.000** (1 hari). Hitung potensi jutaan rupiah per bulan!</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">2. ONLINESHOP (Reseller & Dropship)</button>
+        <div class="faq-answer">
+          <p>Olshop dibagi menjadi 2 jenis:</p>
+          <p><strong>- Reseller:</strong> Kamu harus beli/stok barang terlebih dahulu (keluar modal) baru dijual kembali dengan harga yang dinaikkan.</p>
+          <p><strong>- Dropship (Lebih Simpel):</strong> Kamu tidak perlu beli/stok barang, packing, dll. Kamu hanya mempromosikan produk orang lain. Ketika ada customer order, kamu tinggal beli ke tokonya, urusan packing + pengiriman semua toko yang urus.</p>
+        </div>
+      </div>
+    </div>
+    <p style="color: #000000; margin-top: 20px;">**PENJELASAN BISNIS & TUTORIAL LEBIH DETAIL AKAN DIJELASKAN DI GRUP BIMBINGAN SETELAH KAMU JOIN.**</p>
+  </section>
+
+    <section class="animated-section">
+    <h2 class="section-title">✅ Keuntungan Nyata Gabung @kyy.bisniss</h2>
+    <div class="grid">
+      <div class="card">
+        <ul class="checklist" style="text-align: left;">
+          <li>Potensi Penghasilan **Rp200rb - Rp2jt/hari**</li>
+          <li>Diajarkan **Strategi Marketing** dari Nol</li>
+          <li>Kerja **Lewat HP** tanpa keluar rumah</li>
+          <li>**Tanpa nunjukin muka** & **Tanpa minimum Followers**</li>
+          <li>Kerja dimanapun dan kapanpun (Fleksibel)</li>
+          <li>**Modal 1x** seumur hidup</li>
+          <li>Penghasilan **100% masuk ke kamu** tanpa bagi hasil</li>
+          <li>**Full Bimbingan** & Bebas Konsultasi Selamanya</li>
+          <li>Bisnis anti Riba, **100% Halal**, Bukan MLM/Money Game</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    <section class="animated-section">
+    <h2 class="section-title">💻 Full Bimbingan via Zoom & Modul Lengkap</h2>
+    <video controls style="max-width: 90%; width: 350px; height: auto; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.2);">
+      <source src="video-potrait.mp4" type="video/mp4">
+      Browser kamu tidak mendukung video tag.
+    </video>
+  </section>
+
+    <section class="animated-section">
+    <h2 class="section-title">🚀 10 Fasilitas Lengkap (4 Grup & 6 Channel)</h2>
+    <p>**Semua bahan promosi, tips, trik, dan update terbaru disediakan di sini!**</p>
+    <img src="10.jpg" alt="Fasilitas Grup dan Channel" style="max-width: 90%; height: auto; border-radius: 12px; margin-top: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+  </section>
+
+    <section class="animated-section">
+    <h2 class="section-title">✨ Promo Join Hari Ini Saja! 🔥</h2>
+    <div style="font-size: 1.8rem; margin-bottom: 15px;">
+      <span style="text-decoration: line-through; color: #555;">Rp350.000</span>
+    </div>
+    <div style="margin-bottom: 20px;">
+      <span class="tebal-bara"> HANYA Rp70.000 </span>
+    </div>
+    <div style="font-size: 1.3rem; color: #ff3b30; font-weight: bold; background: #ffebeb; padding: 10px; border-radius: 8px; display: inline-block;">
+      💥 Diskon Lebih dari 80% untuk 10 orang pertama!
+    </div>
+    <h2 class="section-title" style="margin-top: 30px;">⏰ Promo Spesial Berakhir Dalam:</h2>
+    <div id="countdown">00 hari 00 jam 00 menit 00 detik</div>
+    <p style="margin-top: 15px; color: #555; font-weight: 500;">Jangan sampai kelewatan! Harga akan kembali normal ke **Rp350.000**</p>
+  </section>
+
+    <section class="animated-section">
+    <h2 class="section-title">✨ Kata Motivasi</h2>
+    <blockquote style="max-width: 600px; margin: 20px auto; padding: 15px; border-left: 5px solid #4a90e2; background: #f0f8ff; border-radius: 5px; font-style: italic;">
+      <p>"Orang yang sukses sangat menyukai prosesnya, bukan hasil instan."</p>
+      <p>"Kesuksesan adalah sebuah perjalanan, bukan tujuan akhir. Mulai hari ini!"</p>
+    </blockquote>
+  </section>
+
+    <section class="animated-section">
+    <h2 class="section-title">📝 Langkah Mudah Cara Join</h2>
+    <div class="steps">
+      <div class="step">
+        <img src="wa.png" alt="WA">
+        <div>**1. Chat Admin** melalui DM/WA</div>
+      </div>
+      <div class="step">
+        <img src="chat.png" alt="Chat">
+        <div>**2. Ketik 'fix join'** dan kirim</div>
+      </div>
+      <div class="step">
+        <img src="bayar.png" alt="Bayar">
+        <div>**3. Lakukan Pembayaran** promo</div>
+      </div> 
+      <div class="step">
+        <img src="form.png" alt="Form">
+        <div>**4. Mengisi Form** member baru</div>
+      </div> 
+      <div class="step">
+        <img src="class.png" alt="Class">
+        <div>**5. Mengikuti Class Bimbingan**</div>
+      </div>
+      <div class="step">
+        <img src="grup.png" alt="Grup">
+        <div>**6. Masuk Fasilitas Grup**</div>
+      </div>
+    </div>
+  </section>
+
+    <section class="join-section animated-section">
+    <h2 class="section-title" style="color: #1e3a8a;">🚀 Siap Gabung dan Mulai Bisnis Sekarang?</h2>
+    <p><strong>SESUDAH MEMBACA PENJELASAN BISNIS NYA, KAKAK SIAP JOIN BISNIS & MENYELESAIKAN BIAYA ADMINISTRASI HANYA (1x seumur hidup)?</strong></p>
+    
+    <p style="margin-top: 15px;">✅ Setelah pembayaran, kamu akan langsung diarahkan ke:</p>
+    <ul class="checklist">
+      <li>Grup fasilitas bisnis lengkap</li>
+      <li>Class bimbingan bisnis (Full Bimbingan & Pendampingan)</li>
+    </ul>
+    
+    <p style="font-size: 1.1rem; font-weight: bold; margin-top: 25px;">JIKA BERMINAT, CHAT ADMIN SEKARANG DENGAN KETIK:</p>
+    <div class="cta-button">
+      <a href="https://wa.me/62895416130597?text=FIX%20JOIN%20PROMO%20KYB%20%5BNama%20Anda%5D" class="btn">📩 FIX JOIN</a>
+    </div>
+  </section>
+
+    <section class="animated-section">
+    <h2 class="section-title">📜 Cek Surat Legalitas Usaha</h2>
+    <p>Untuk memastikan legalitas usaha dan surat resmi kami, silakan cek melalui link berikut:</p>
+    <div style="margin-top: 20px;">
+      <a href="https://docs.google.com/document/d/1P-9LXxF2QNFGvqD9_aUi6izz4EjTG1JEOoY2VucoHcE/edit?usp=drivesdk" target="_blank" style="display: inline-block; margin: 10px; background-color: #4a90e2; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background-color 0.3s;">SURAT LEGALITAS RESMI</a>
+    </div>
+  </section>
+
+    <section class="animated-section">
+    <h2 class="section-title">🚫 WAJIB DIPERHATIKAN! Ini BUKAN...</h2>
+    <div class="card" style="width: 100%; max-width: 600px; margin: 0 auto; background: #fff3f0; border-left-color: #ff3b30;">
+      <ul style="list-style: none; padding: 0; text-align: left;">
+        <li style="margin-bottom: 8px;">❌ Bukan judi online/money game/MLM.</li>
+        <li style="margin-bottom: 8px;">❌ Bukan bisnis abal-abal (cek legalitas).</li>
+        <li style="margin-bottom: 8px;">❌ Tanpa target penjualan/tuntutan waktu.</li>
+        <li style="margin-bottom: 8px;">❌ Tanpa KTP/ATM untuk pelajar.</li>
+        <li style="margin-bottom: 8px;">❌ Tanpa bagi hasil (profit 100% milikmu).</li>
+      </ul>
+    </div>
+  </section>
+
+    <section class="animated-section">
+    <h2 class="section-title">❓ FAQ - Pertanyaan Sering Diajukan</h2>
+    <div class="faq">
+            <div class="faq-item">
+        <button class="faq-question">Kak saya masih ragu takut gabisa, ga pernah berbisnis?</button>
+        <div class="faq-answer">
+          <p>Tenang aja! Kami menyediakan **full bimbingan** dan asal kamu punya kemauan belajar. Kami sediakan **TIPS & TRIK SUKSES** mulai dari cara promosi, caption, cara jual, dll. Diajarin dari **NOL sampai PAHAM**.</p>
+        </div>
+      </div>
+            <div class="faq-item">
+        <button class="faq-question">Kak penghasilan perhari nya berapa?</button>
+        <div class="faq-answer">
+          <p>**Rp100rb - Rp1jt/Hari** tergantung konsistensi kamu jalanin bisnisnya. Kalau malas dan cuma nunggu duit, ya gaada hasilnya.</p>
+        </div>
+      </div>
+            <div class="faq-item">
+        <button class="faq-question">Kak tapi aku gapunya KTP/ATM?</button>
+        <div class="faq-answer">
+          <p>Di bisnis ini tidak perlu punya KTP/ATM. Setelah join nanti akan diajarkan cara mencairkan uang yang sangat gampang, cocok untuk pelajar.</p>
+        </div>
+      </div>
+            <div class="faq-item">
+        <button class="faq-question">Kak sekarang harga join berapa?</button>
+        <div class="faq-answer">
+          <p>Saat ini harga join promo **Rp70.000** dari normal **Rp350.000**. Cukup 1x pembayaran untuk **seumur hidup!**</p>
+        </div>
+      </div>
+            <div class="faq-item">
+        <button class="faq-question">Kak bisnis ini berlaku sampai kapan?</button>
+        <div class="faq-answer">
+          <p>BERLAKU **SEUMUR HIDUP / SELAMANYA**. Hanya sekali join, kamu dapat akses bimbingan dan fasilitas selamanya.</p>
+        </div>
+      </div>
+            <div class="faq-item">
+        <button class="faq-question">Kak ini nipu ga? aman kan?</button>
+        <div class="faq-answer">
+          <p>Tentu **amanah 100%**. Kami memiliki legalitas resmi dan sudah memiliki lebih dari **80.000+ member**. Cek story/sorotan IG kami untuk bukti yang lengkap!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <a href="https://wa.me/62895416130597?text=FIX%20JOIN%20PROMO%20KYB%20%5BNama%20Anda%5D" class="wa-button" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+    💬 **CHAT ADMIN SEKARANG**
+  </a>
+
+    <footer>
+    <p>Info pembayaran & lainnya langsung hubungi admin ke WhatsApp.</p>
+    <p>&copy; 2025 Kyy Bisniss. All Rights Reserved.</p>
+  </footer>
+
+    <script>
+    /* --- MEMBER COUNTER --- */
+    let count = 0;
+    let target = 80320;
+    let speed = 2;
+    let counter = document.getElementById("counter");
+
+    function updateCounter() {
+      if (count < target) {
+        count += Math.floor(Math.random() * 300) + 1;
+        if (count > target) count = target;
+        counter.textContent = count.toLocaleString('id-ID');
+        setTimeout(updateCounter, speed);
+      } else {
+        // Pastikan angka terakhir akurat
+        counter.textContent = target.toLocaleString('id-ID');
+      }
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      updateCounter();
+      // Confetti setelah 3 detik
+      setTimeout(() => {
+        confetti({
+          particleCount: 150,
+          spread: 90,
+          origin: { y: 0.6 }
+        });
+      }, 1500);
+    });
+
+    /* --- TESTIMONIAL SLIDER --- */
+    let currentIndex = 0;
+    const slides = document.querySelector('.slides');
+    const totalSlides = slides.children.length;
+    const slideInterval = 3000; // Ganti setiap 3 detik
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    setInterval(nextSlide, slideInterval);
+
+
+    /* --- FLOATING CHAT/TESTIMONIALS --- */
+    const chats = [
+      document.getElementById("chat1"),
+      document.getElementById("chat2"),
+      document.getElementById("chat3"),
+      document.getElementById("chat4"),
+      document.getElementById("chat5")
+    ];
+    let currentChat = 0;
+
+    function showChat() {
+      chats.forEach((chat, index) => {
+        chat.style.display = index === currentChat ? "block" : "none";
+      });
+      currentChat = (currentChat + 1) % chats.length;
+    }
+
+    showChat();
+    setInterval(showChat, 3300);
+
+    /* --- FAQ ACCORDION --- */
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+      item.querySelector('.faq-question').addEventListener('click', () => {
+        item.classList.toggle('active');
+        faqItems.forEach(other => {
+          if (other !== item) {
+            other.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    /* --- COUNTDOWN TIMER --- */
+    const targetDate = new Date();
+    // Atur berakhir 1 hari dari sekarang (24 jam)
+    targetDate.setDate(targetDate.getDate() + 1); 
+
+    const countdown = document.getElementById("countdown");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        countdown.textContent = "PROMO TELAH BERAKHIR!";
+        countdown.style.color = "#999";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hrs = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / (1000 * 60)) % 60);
+      const secs = Math.floor((diff / 1000) % 60);
+
+      countdown.textContent = 
+        `${String(days).padStart(2, '0')} hari ${String(hrs).padStart(2, '0')} jam ${String(mins).padStart(2, '0')} menit ${String(secs).padStart(2, '0')} detik`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    /* --- REVEAL ON SCROLL (ANIMATED SECTIONS) --- */
+    const animatedSections = document.querySelectorAll('.animated-section');
+    const sectionTitles = document.querySelectorAll('.section-title');
+
+    function checkVisibility() {
+      const triggerBottom = window.innerHeight * 0.85;
+
+      animatedSections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+
+        if (sectionTop < triggerBottom) {
+          section.classList.add('is-visible');
+        }
+      });
+
+      sectionTitles.forEach(title => {
+        const titleTop = title.getBoundingClientRect().top;
+        if (titleTop < triggerBottom) {
+          title.classList.add('is-visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', checkVisibility);
+    window.addEventListener('resize', checkVisibility);
+    checkVisibility(); // Cek saat halaman dimuat
+  </script>
+
+</body>
+</html>
